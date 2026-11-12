@@ -16,7 +16,7 @@
   /* 위 제목 / 가운데 비빔 영상 / SINCE / 맨 아래 멤버 이름 */
   body {
     display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto;
-    gap: 2vmin; padding: 2.4vmin;
+    gap: 2vmin; padding: 2.4vmin 2.4vmin 0; /* 아래 여백 없앰 — 이름 탭 영역(44px)이 바닥 여백 역할 */
     background: var(--paper);
     color: var(--soy);
     font-family: "Archivo", system-ui, sans-serif;
