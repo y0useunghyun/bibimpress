@@ -1,5 +1,5 @@
 /* read · work 공통 — 흰 바탕 (빨강은 메인에서만) */
-:root { --paper: #FFFFFF; --soy: #2B1406; --film: #0D0D0D; --h: clamp(52px, 5vw, 72px); /* 헤더 높이 */ }
+:root { --paper: #FFFFFF; --soy: #2B1406; --h: clamp(52px, 5vw, 72px); /* 헤더 높이 */ }
 * { margin: 0; box-sizing: border-box; }
 body {
   min-height: 100vh;
@@ -7,27 +7,16 @@ body {
   font-family: "Archivo", system-ui, sans-serif;
 }
 
-/* 헤더 = 얇은 흑백 띠: 비빔밥데이 장면들을 옆으로 이어 붙임 (media/film.jpg) */
+/* 헤더 — 흰 바탕, 아래 가는 선만 */
 header {
   height: var(--h);
   padding: 0 2.4vmin;
   display: flex; justify-content: space-between; align-items: center;
-  color: #fff;
-  background:
-    linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)),                 /* 글씨 읽히게 전체 살짝 어둡게 */
-    url("media/film.jpg") left center / auto 100% repeat-x,
-    var(--film);
-  animation: film-roll 90s linear infinite;
+  border-bottom: 1px solid var(--soy);
 }
-/* 띠가 왼쪽으로 천천히 흘러감. 한 바퀴 = film.jpg 폭 (4650×160 → 높이의 29.0625배) */
-@keyframes film-roll {
-  from { background-position: 0 0, 0 center; }
-  to   { background-position: 0 0, calc(var(--h) * -29.0625) center; }
-}
-@media (prefers-reduced-motion: reduce) { header { animation: none; } }
 
 header nav { display: flex; gap: 1.2em; }
-nav a, .home { color: inherit; text-decoration: none; text-shadow: 0 1px 6px rgba(0, 0, 0, .5); }
+nav a, .home { color: inherit; text-decoration: none; }
 .home { font-size: clamp(20px, 2.2vw, 32px); font-variation-settings: "wdth" 125, "wght" 540; }
 nav a { font-size: clamp(16px, 1.6vw, 24px); font-variation-settings: "wdth" 110, "wght" 420; }
 nav a:hover, nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: .2em; }

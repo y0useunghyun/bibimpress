@@ -42,6 +42,9 @@
   .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); align-items: start; gap: 12px; margin: 2.4vmin 0 2em; } /* 작게, 한 줄에 여러 장 */
   .shot { background: #ECE8E2; display: grid; place-items: end start; padding: 10px 12px; font-size: 12px; color: rgba(0, 0, 0, .55); text-decoration: none; line-height: 1.35; }
   a.shot:hover { background: #E2DDD5; color: #000; }
+  .pic { color: inherit; text-decoration: none; font-size: 12px; line-height: 1.35; }
+  .pic img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #ECE8E2; margin-bottom: 6px; }
+  .pic:hover span { text-decoration: underline; }
   .desc p + p { margin-top: .9em; }
   .desc { max-width: 38em; }
 
@@ -149,9 +152,63 @@
     ['Brian Wilson: An Art Book', 'brian-wilson'],
     ['An Architecture of Play', 'an-architecture-of-play']
   ];
+  // 표지: 출판사 서버 이미지를 그대로 불러옴 (복사 X). files/books/ 뒤 경로
+  const FCB_COVER = {
+    'whippersnappers': 'whippersnappers/_gridThumbnail/Whippersnappers-thumbnail.jpg',
+    'londons-ours': 'londons-ours/_gridThumbnail/LondonsOursThumbnail_2026-03-13-091653_mgmj.jpg',
+    'londons-ours-limited-edition-print': 'londons-ours-limited-edition-print/_gridThumbnail/LondonsOursPrintThumbnail.jpg',
+    'loncraine-broxton': 'loncraine-broxton/_gridThumbnail/LoncraineBroxtonSmallThumbnail.jpg',
+    'candy': 'candy/_gridThumbnail/CandyAndyThumb.jpg',
+    'tam-joseph': 'tam-joseph/_gridThumbnail/I-Know-What-I-See-thumbnail.jpg',
+    'more-than-a-snapshot': 'more-than-a-snapshot/_gridThumbnail/Snapshot_SmlThumb.jpg',
+    'wheels-of-light': 'wheels-of-light/_gridThumbnail/WOLHomeThumb.jpg',
+    'treasure-island': 'treasure-island/_gridThumbnail/Treasure-Island-Cover-FCB-web-homepage.jpg',
+    'flag-waves-house-flags-from-the-national-maritime-museum': 'flag-waves-house-flags-from-the-national-maritime-museum/_gridThumbnail/Homepage_thumb_FlagWaves.jpg',
+    'nuclear-war-in-the-uk': 'nuclear-war-in-the-uk/_gridThumbnail/Nuclear-Thumb.jpg',
+    'posters-from-paddington-printshop': 'posters-from-paddington-printshop/_gridThumbnail/Paddington-Printshop-thumbnailweb.jpg',
+    'wobbly-sounds': 'wobbly-sounds/_gridThumbnail/WobblySounds-thumbnail.jpg',
+    'face-in-the-crowd': 'face-in-the-crowd/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0001_FITC.jpg',
+    'greetings-from-the-barricades': 'greetings-from-the-barricades/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_Barricades.jpg',
+    'leeds-postcards': 'leeds-postcards/_gridThumbnail/Leeds-Postcards-cover-thumb.jpg',
+    'poster-workshop-1968-1971': 'poster-workshop-1968-1971/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0000_PWorkshop.jpg',
+    'ufo-drawings': 'ufo-drawings/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0000_UFO-Drawings.jpg',
+    'eyeball-cards': 'eyeball-cards/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0001_Eyeball-Cards.jpg',
+    'see-red-womens-workshop': 'see-red-womens-workshops/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0005_See-Red_170905_154538.jpg',
+    'twenty-thousand-leagues-under-the-sea': 'twenty-thousand-leagues-under-the-sea/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0006_20000-leagues.jpg',
+    'heart-of-darkness': 'heart-of-darkness/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0002_Heart-of-Darkness_170906_093445.jpg',
+    'the-overcoat': 'the-overcoat/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0001_Overcoat.jpg',
+    'the-nose': 'the-nose/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0000_Nose.jpg',
+    'the-art-of-smallfilms': 'the-art-of-smallfilms/_gridThumbnail/3015-Four-Corners-website-SmallfilmsThumbt.jpg',
+    'some-canterbury-tales': 'some-canterbury-tales/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0015_Canterbury-Tales.jpg',
+    'the-graphic-world-of-paul-peter-piech': 'the-graphic-world-of-paul-peter-piech/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0004_Piech.jpg',
+    'pirate-nightmare-vice-explosion': 'pirate-nightmare-vice-explosion/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0002_Pirate-Nightmare.jpg',
+    'madame-bovary': 'madame-bovary/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0023_Madame-Bovary.jpg',
+    'prison-landscapes': 'prison-landscapes/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0007_Prison-Landscape.jpg',
+    'disturbances-critical-art-ensemble': 'disturbances-critical-art-ensemble/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0020_Disturbances.jpg',
+    'the-prisoner-of-zenda': 'the-prisoner-of-zenda/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0014_Zenda.jpg',
+    'beauty-is-in-the-street': 'beauty-is-in-the-street/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0025_Beauty-is-in-the-street.jpg',
+    'vanity-fair': 'vanity-fair/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0009_Vanity-Fair.jpg',
+    'free-speech-zone-michael-patterson-carver': 'free-speech-zone-michael-patterson-carver/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0017_Free-Speech-Zone.jpg',
+    'show-and-tell-a-chronicle-of-group-material': 'show-and-tell-a-chronicle-of-group-material/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0011_Show-and-Tell.jpg',
+    'a-stick-of-green-candy': 'a-stick-of-green-candy/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0010_Stick-of-Green-Candy.jpg',
+    'nau-sea-sea-sick': 'nau-sea-sea-sick/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0008_Nau-Sea-Sea-Sick.jpg',
+    'the-jet-age-compendium-paolozzi-at-ambit': 'the-jet-age-compendium-paolozzi-at-ambit/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0016_Ambit.jpg',
+    'dracula': 'dracula/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0018_Dracula.jpg',
+    'blumfeld-an-elderly-bachelor': 'blumfeld-an-elderly-batchelor/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0024_Elderly-Bachelor.jpg',
+    'the-picture-of-dorian-gray': 'the-picture-of-dorian-gray/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0019_Dorian-Gray.jpg',
+    'about-the-relative-size-of-things-in-the-universe': 'about-the-relative-size-of-things-in-the-universe/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0013_Martin-Beck.jpg',
+    'how-to-ride-the-bus': 'how-to-ride-the-bus/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0012_Bus.jpg',
+    'come-alive-the-spirited-art-of-sister-corita': 'come-alive-the-spirited-art-of-sister-corita/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0021_Come-Alive.jpg',
+    'brian-wilson': 'brian-wilson/_gridThumbnail/3015-Four-Corners-website-Hi-res-covers_0022_Brian-Wilson_170905_150620.jpg',
+    'an-architecture-of-play': 'an-architecture-of-play/_gridThumbnail/3015-Four-Corners-website-covers_0026_Architecture-of-Play.jpg',
+    'women-for-peace-banners-from-greenham-common': 'women-for-peace-banners-from-greenham-common/_mediumImage/WOMEN_FOR_PEACE_01.jpg'
+  };
   Object.assign(BOOKS[1], {
     title: '포코너북스', author: 'Four Corners Books', publisher: 'London', year: '2003–',
-    shots: FCB.map(([caption, slug]) => ({ ratio: 4 / 5, caption, href: `https://www.fourcornersbooks.co.uk/books/${slug}/` })),
+    shots: FCB.map(([caption, slug]) => ({
+      ratio: 4 / 5, caption, href: `https://www.fourcornersbooks.co.uk/books/${slug}/`,
+      img: FCB_COVER[slug] && `https://www.fourcornersbooks.co.uk/files/books/${FCB_COVER[slug]}`,
+    })),
   });
 
   const list = document.getElementById('list');
@@ -173,8 +230,10 @@
       <h1>${esc(b.title)}</h1>
       <p class="meta">${esc(b.author)} · ${esc(b.publisher)} · ${b.year} — ${esc(b.date)}에 같이 봄</p>
       <div class="shots">${b.shots.map((sh, k) => {
-        const { ratio, caption, href } = typeof sh === 'number' ? { ratio: sh } : sh;
+        const { ratio, caption, href, img } = typeof sh === 'number' ? { ratio: sh } : sh;
         const label = caption ? esc(caption) : `${k + 1} / ${b.shots.length}`;
+        if (img) return `<a class="pic" href="${esc(href)}" target="_blank" rel="noopener">
+          <img src="${esc(img)}" alt="${label}" loading="lazy"><span>${label}</span></a>`;
         return href
           ? `<a class="shot" href="${esc(href)}" target="_blank" rel="noopener" style="aspect-ratio:${ratio}">${label}</a>`
           : `<div class="shot" style="aspect-ratio:${ratio}">${label}</div>`;
