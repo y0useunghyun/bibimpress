@@ -13,9 +13,9 @@
   }
   * { margin: 0; box-sizing: border-box; }
   html, body { height: 100%; overflow: hidden; }
-  /* 위 제목 / 가운데 비빔 영상 / 맨 아래 SINCE */
+  /* 위 제목 / 가운데 비빔 영상 / SINCE / 맨 아래 멤버 이름 */
   body {
-    display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto;
     gap: 2vmin; padding: 2.4vmin;
     background: var(--paper);
     color: var(--soy);
@@ -38,6 +38,13 @@
     translate: -50% -50%;
     opacity: .35;
   }
+  /* 멤버 이름 — 가나다순, 글씨는 작게 / 탭 영역은 44px */
+  .members { display: flex; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0; margin-top: -1vmin; }
+  .members a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px;
+    color: inherit; text-decoration: none; font-size: 14px;
+  }
+  .members a:hover { text-decoration: underline; text-underline-offset: .2em; }
   .since {
     text-align: center;
     font-size: clamp(20px, 4vw, 60px);
@@ -57,6 +64,20 @@
   </a>
 
   <p class="since">since 2026</p>
+
+  <!-- 멤버 (가나다순). 링크는 나중에 work에서 사람별로 모아 볼 자리 -->
+  <ul class="members" aria-label="멤버">
+    <li><a href="work.html#김태환">김태환</a></li>
+    <li><a href="work.html#김희연">김희연</a></li>
+    <li><a href="work.html#민다영">민다영</a></li>
+    <li><a href="work.html#송명선">송명선</a></li>
+    <li><a href="work.html#안연미">안연미</a></li>
+    <li><a href="work.html#양예슬">양예슬</a></li>
+    <li><a href="work.html#유승현">유승현</a></li>
+    <li><a href="work.html#임혜진">임혜진</a></li>
+    <li><a href="work.html#진혜린">진혜린</a></li>
+    <li><a href="work.html#한주희">한주희</a></li>
+  </ul>
 
   <script src="bowl.js"></script>
   <script>
