@@ -45,12 +45,14 @@
   .pic { color: inherit; text-decoration: none; font-size: 12px; line-height: 1.35; }
   .pic img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #ECE8E2; margin-bottom: 6px; }
   .pic:hover span { text-decoration: underline; }
-  .desc p + p { margin-top: .9em; }
-  .desc { max-width: 38em; }
+  /* 설명·댓글 — 폭 좁게, 촘촘하게 */
+  .desc { max-width: 30em; font-size: 15px; line-height: 1.6; word-break: keep-all; }
+  .desc p + p { margin-top: .6em; }
 
-  .comments { margin-top: 2.4em; max-width: 38em; }
-  .comments h2 { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .6em; }
-  .comments li { list-style: none; padding: .8em 0; border-top: 1px solid rgba(43, 20, 6, .2); }
+  .comments { margin-top: 1.6em; max-width: 30em; font-size: 14px; line-height: 1.5; word-break: keep-all; }
+  .comments h2 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .3em; }
+  .comments ul { padding: 0; }
+  .comments li { list-style: none; padding: .45em 0; border-top: 1px solid rgba(43, 20, 6, .2); }
   .comments b { font-weight: 600; margin-right: .6em; }
 
   /* 폰: 위 목록 / 아래 상세, 페이지 전체가 스크롤 */
