@@ -43,7 +43,9 @@
   .shot { background: #ECE8E2; display: grid; place-items: end start; padding: 10px 12px; font-size: 12px; color: rgba(0, 0, 0, .55); text-decoration: none; line-height: 1.35; }
   a.shot:hover { background: #E2DDD5; color: #000; }
   .pic { color: inherit; text-decoration: none; font-size: 12px; line-height: 1.35; }
-  .pic img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #ECE8E2; margin-bottom: 6px; }
+  .pic.wide { grid-column: span 2; }
+  .meta a { color: inherit; }
+  .pic img { display: block; width: 100%; object-fit: cover; background: #ECE8E2; margin-bottom: 6px; }
   .pic:hover span { text-decoration: underline; }
   /* 설명·댓글 — 폭 좁게, 촘촘하게 */
   .desc { max-width: 30em; font-size: 15px; line-height: 1.6; word-break: keep-all; }
@@ -213,6 +215,27 @@
     })),
   });
 
+  // 003: UbuWeb — 1996년부터 이어진 아방가르드 온라인 아카이브 (ubuweb.com)
+  Object.assign(BOOKS[2], {
+    title: 'UbuWeb', author: '아방가르드 예술·미디어 온라인 아카이브', publisher: 'ubuweb.com', year: '1996–',
+    site: 'https://ubuweb.com/index.html',
+    desc: [
+      '1996년부터 운영된 아방가르드 예술·미디어 온라인 아카이브. 영화·영상, 사운드, 무용, 글 자료를 무료로 공개한다.',
+      '미국 의회도서관이 사이트 전체를 영구 보존하고 있다. 아래 칸은 사이트의 주요 섹션 — 누르면 해당 섹션으로 간다.',
+    ],
+    shots: [{ img: 'media/read/ubu.jpg', ratio: 16 / 10, wide: true, caption: 'ubuweb.com 첫 화면', href: 'https://ubuweb.com/index.html' }].concat([{"caption": "Film & Video", "href": "https://ubuweb.com/film/index.html", "ratio": 1.5}, {"caption": "Sound", "href": "https://ubuweb.com/sound/index.html", "ratio": 1.5}, {"caption": "Dance", "href": "https://ubuweb.com/dance/index.html", "ratio": 1.5}, {"caption": "Papers", "href": "https://ubuweb.com/papers/index.html", "ratio": 1.5}, {"caption": "Historical", "href": "https://ubuweb.com/historical/index.html", "ratio": 1.5}, {"caption": "Visual Poetry", "href": "https://ubuweb.com/vp/index.html", "ratio": 1.5}, {"caption": "Conceptual Comics", "href": "https://ubuweb.com/cc/index.html", "ratio": 1.5}, {"caption": "Conceptual Writing", "href": "https://ubuweb.com/concept/index.html", "ratio": 1.5}, {"caption": "Contemporary", "href": "https://ubuweb.com/contemp/index.html", "ratio": 1.5}, {"caption": "Aspen Magazine", "href": "https://ubuweb.com/aspen/index.html", "ratio": 1.5}, {"caption": "Outsiders", "href": "https://ubuweb.com/outsiders/index.html", "ratio": 1.5}, {"caption": "/ubu Editions", "href": "https://ubuweb.com/ubu/index.html", "ratio": 1.5}, {"caption": "365 Days Project", "href": "https://ubuweb.com/outsiders/365/index.html", "ratio": 1.5}, {"caption": "Ethnopoetics", "href": "https://ubuweb.com/ethno/index.html", "ratio": 1.5}, {"caption": "Electronic Music Resources", "href": "https://ubuweb.com/emr/index.html", "ratio": 1.5}, {"caption": "UbuWeb Top Tens", "href": "https://ubuweb.com/resources/top_tens.html", "ratio": 1.5}]),
+  });
+  // 004: ABYME — 활자 주조소 겸 출판사 (abyme.net)
+  Object.assign(BOOKS[3], {
+    title: 'ABYME', author: '활자 주조소 · 출판사', publisher: 'abyme.net', year: '',
+    site: 'https://www.abyme.net/',
+    desc: [
+      '글자체를 만들고 파는 활자 주조소이자, 한정판 책과 아트 에디션을 내는 출판사.',
+      '「Revue」에는 레터링과 타이포그래피 역사를 다룬 글을 싣는다. 아래 칸은 Revue 글과 카탈로그(글자체·책) — 이미지는 사이트에서 그대로 불러옴.',
+    ],
+    shots: [{ img: 'media/read/abyme.jpg', ratio: 16 / 10, wide: true, caption: 'abyme.net 첫 화면', href: 'https://www.abyme.net/' }].concat([{"caption": "Revue — Essential forms, a survey of lettering standards", "href": "https://www.abyme.net/revue/essentialforms/", "img": "https://www.abyme.net/wp-content/uploads/2024/10/A046_chouffet-2400x1726.jpg"}, {"caption": "Revue — The first sanserif type (James Mosley)", "href": "https://www.abyme.net/revue/thefirstsanseriftype/", "img": "https://www.abyme.net/wp-content/uploads/2023/11/A045_blake_1819c-2400x1584.jpg"}, {"caption": "Revue — Paul Elliman, YES, NO, DON’T KNOW", "href": "https://www.abyme.net/revue/yes-no-dont-know/", "img": "https://www.abyme.net/wp-content/uploads/2017/12/yesno_spirit_6_60p-2400x1602.jpg"}, {"caption": "Revue — HMS Victory, a voyage in photographs", "href": "https://www.abyme.net/revue/victory/", "img": "https://www.abyme.net/wp-content/uploads/2016/11/victory6_60p-2400x1560.jpg"}, {"caption": "Revue — Abîmées, typefaces for Latin epigraphy", "href": "https://www.abyme.net/revue/abimees/", "img": "https://www.abyme.net/wp-content/uploads/2021/06/A033_4_simil.jpg"}, {"caption": "Revue — Carolee Schneemann, ABC We Print Anything", "href": "https://www.abyme.net/revue/tenderbooks/", "img": "https://www.abyme.net/wp-content/uploads/2018/07/JMS-Tenderbooks-4839-1_web-2400x1800.jpg"}, {"caption": "Revue — Berthe Morisot, Le Berceau", "href": "https://www.abyme.net/revue/berthe/", "img": "https://www.abyme.net/wp-content/uploads/2018/07/cradle_1600_60p.jpg"}, {"caption": "Axo (15 styles)", "href": "https://www.abyme.net/catalogue/axo/", "img": "https://www.abyme.net/wp-content/uploads/2024/03/A035_3c.png"}, {"caption": "Persona (3 styles)", "href": "https://www.abyme.net/catalogue/persona/", "img": "https://www.abyme.net/wp-content/uploads/2022/06/A013_3.png"}, {"caption": "Mercure (3 styles)", "href": "https://www.abyme.net/catalogue/mercure/", "img": "https://www.abyme.net/wp-content/uploads/2021/05/A024_21.png"}, {"caption": "Berthe (2 styles)", "href": "https://www.abyme.net/catalogue/berthe/", "img": "https://www.abyme.net/wp-content/uploads/2018/07/berthe_2_12-2400x960.png"}, {"caption": "Nizioleti", "href": "https://www.abyme.net/catalogue/nizioleti/", "img": "https://www.abyme.net/wp-content/uploads/2019/11/nizioleti_amour.png"}, {"caption": "English Egyptian", "href": "https://www.abyme.net/catalogue/englishegyptian/", "img": "https://www.abyme.net/wp-content/uploads/2023/07/A002.png"}, {"caption": "Sweathearts typeface", "href": "https://www.abyme.net/catalogue/sweathearts/", "img": "https://www.abyme.net/wp-content/uploads/2022/11/A022_11b.png"}, {"caption": "Anguille — Christophe Jacquet dit Toffe", "href": "https://www.abyme.net/catalogue/anguille/", "img": "https://www.abyme.net/wp-content/uploads/2023/03/A007_hokusai.jpg"}, {"caption": "Sweathearts (book)", "href": "https://www.abyme.net/catalogue/sweatheartsbook/", "img": "https://www.abyme.net/wp-content/uploads/2024/02/A043_2d.jpg"}, {"caption": "Margaret — Thomas Grünfeld", "href": "https://www.abyme.net/catalogue/margaret/"}, {"caption": "ABC We Print Anything — Carolee Schneemann", "href": "https://www.abyme.net/catalogue/abc/", "img": "https://www.abyme.net/wp-content/uploads/2017/12/abc4.jpg"}, {"caption": "YES, NO, DON’T KNOW — Paul Elliman", "href": "https://www.abyme.net/catalogue/yesno/", "img": "https://www.abyme.net/wp-content/uploads/2017/12/yesno_1_60p-1-2400x1606.jpg"}].map((s) => ({ ratio: 4 / 5, ...s }))),
+  });
+
   const list = document.getElementById('list');
   const detail = document.getElementById('detail');
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -230,12 +253,12 @@
     list.querySelectorAll('button').forEach((btn) => btn.setAttribute('aria-current', btn.dataset.i == i));
     detail.innerHTML = `
       <h1>${esc(b.title)}</h1>
-      <p class="meta">${esc(b.author)} · ${esc(b.publisher)} · ${b.year} — ${esc(b.date)}에 같이 봄</p>
+      <p class="meta">${[b.author, b.publisher, b.year].filter(Boolean).map(esc).join(' · ')} — ${esc(b.date)}에 같이 봄${b.site ? ` · <a href="${esc(b.site)}" target="_blank" rel="noopener">사이트 ↗</a>` : ''}</p>
       <div class="shots">${b.shots.map((sh, k) => {
-        const { ratio, caption, href, img } = typeof sh === 'number' ? { ratio: sh } : sh;
+        const { ratio, caption, href, img, wide } = typeof sh === 'number' ? { ratio: sh } : sh;
         const label = caption ? esc(caption) : `${k + 1} / ${b.shots.length}`;
-        if (img) return `<a class="pic" href="${esc(href)}" target="_blank" rel="noopener">
-          <img src="${esc(img)}" alt="${label}" loading="lazy"><span>${label}</span></a>`;
+        if (img) return `<a class="pic${wide ? ' wide' : ''}" href="${esc(href)}" target="_blank" rel="noopener">
+          <img src="${esc(img)}" alt="${label}" loading="lazy" style="aspect-ratio:${ratio || 4 / 5}"><span>${label}</span></a>`;
         return href
           ? `<a class="shot" href="${esc(href)}" target="_blank" rel="noopener" style="aspect-ratio:${ratio}">${label}</a>`
           : `<div class="shot" style="aspect-ratio:${ratio}">${label}</div>`;
