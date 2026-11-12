@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bibimpress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:     #FFFFFF; /* 바닥 — 흰색, 그 위에 비빔밥 그릇 */
+    --soy:       #2B1406; /* 글자 — 간장 */
+  }
+  * { margin: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  /* 위 제목 / 가운데 비빔 영상 / 맨 아래 SINCE */
+  body {
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 2vmin; padding: 2.4vmin;
+    background: var(--paper);
+    color: var(--soy);
+    font-family: "Archivo", system-ui, sans-serif;
+  }
+  .title { display: block; width: 100%; height: auto; }
+  .title text {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 125, "wght" 540;
+    fill: var(--soy);
+  }
+  /* 비빔밥데이 영상 — 누르면 read.html */
+  .reel { display: block; min-height: 0; place-self: center; width: clamp(300px, 54vw, 900px); } /* 작게, 가운데 */
+  .reel video { display: block; width: 100%; height: auto; max-height: 100%; }
+  .reel:focus-visible { outline: 4px solid var(--soy); outline-offset: 4px; }
+  /* 배경에 크게 깔린 비빔밥 그릇 (bowl.js) — 화면 밖으로 잘려도 괜찮음, 글·영상 방해 안 하게 옅게 */
+  svg.bowl {
+    position: fixed; z-index: -1; pointer-events: none;
+    left: 50%; top: 50%; width: max(120vw, 120vh); height: auto;
+    translate: -50% -50%;
+    opacity: .35;
+  }
+  .since {
+    text-align: center;
+    font-size: clamp(20px, 4vw, 60px);
+    font-variation-settings: "wdth" 110, "wght" 420;
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <svg class="bowl" viewBox="0 0 1000 1000" aria-hidden="true"></svg>
+  <svg class="title" viewBox="0 0 1000 150" aria-label="bibimpress" role="img">
+    <text x="0" y="118" font-size="160" textLength="1000" lengthAdjust="spacingAndGlyphs">bibimpress</text>
+  </svg>
+
+  <a class="reel" href="read.html" aria-label="비빔프레스 들어가기">
+    <video src="media/bibim.mp4" poster="media/bibim-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+  </a>
+
+  <p class="since">since 2026</p>
+
+  <script src="bowl.js"></script>
+  <script>
+  // 움직임 줄이기 설정이면 멈춘 한 장면만
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.reel video').pause();
+  </script>
+</body>
+</html>
