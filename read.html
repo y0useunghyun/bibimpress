@@ -39,8 +39,9 @@
   .detail { line-height: 1.7; padding-top: calc(2.4vmin + var(--h1) * 1.4); }
   .detail h1 { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.25; font-variation-settings: "wdth" 110, "wght" 520; }
   .meta { margin: .3em 0 0; padding-bottom: 10px; border-bottom: 1px solid #000; font-size: 14px; opacity: .8; }
-  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); align-items: start; gap: 12px; margin: 2.4vmin 0 2em; } /* 작게, 한 줄에 여러 장 */
-  .shot { background: #ECE8E2; display: grid; place-items: end start; padding: 10px 12px; font-size: 12px; color: rgba(0, 0, 0, .45); }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); align-items: start; gap: 12px; margin: 2.4vmin 0 2em; } /* 작게, 한 줄에 여러 장 */
+  .shot { background: #ECE8E2; display: grid; place-items: end start; padding: 10px 12px; font-size: 12px; color: rgba(0, 0, 0, .55); text-decoration: none; line-height: 1.35; }
+  a.shot:hover { background: #E2DDD5; color: #000; }
   .desc p + p { margin-top: .9em; }
   .desc { max-width: 38em; }
 
@@ -98,6 +99,60 @@
   }));
   // 예시: 존 모건 책 — 사진 8장 올린 경우
   Object.assign(BOOKS[0], { title: '존 모건 (예시)', author: 'John Morgan Studio' });
+  // 002: 포코너북스 — 출판사 책 목록 (fourcornersbooks.co.uk/books, 2026-11-12 기준 48권). 표지는 우리가 찍은 사진으로 교체할 자리
+  const FCB = [
+    ['Whippersnappers: How Children Became Photographers', 'whippersnappers'],
+    ["London's Ours! Images From The Greater London Council 1981–1986", 'londons-ours'],
+    ['Loncraine Broxton: Innovations & Executive Toys 1969-1997', 'loncraine-broxton'],
+    ['Candy, Andy & The Bearandas', 'candy'],
+    ['Tam Joseph: I Know What I See', 'tam-joseph'],
+    ['More Than A Snapshot: A Visual History of Photo Wallets', 'more-than-a-snapshot'],
+    ['Wheels of Light: Designs for British Light Shows 1970-1990', 'wheels-of-light'],
+    ['Treasure Island', 'treasure-island'],
+    ['Women For Peace: Banners From Greenham Common', 'women-for-peace-banners-from-greenham-common'],
+    ['Flag Waves: House Flags from the National Maritime Museum', 'flag-waves-house-flags-from-the-national-maritime-museum'],
+    ['Nuclear War In The UK', 'nuclear-war-in-the-uk'],
+    ['Posters from Paddington Printshop', 'posters-from-paddington-printshop'],
+    ['Wobbly Sounds, A Collection of British Flexi Discs', 'wobbly-sounds'],
+    ['Face In The Crowd', 'face-in-the-crowd'],
+    ['Greetings From The Barricades', 'greetings-from-the-barricades'],
+    ['Leeds Postcards', 'leeds-postcards'],
+    ['Poster Workshop 1968-1971', 'poster-workshop-1968-1971'],
+    ['UFO Drawings From The National Archives', 'ufo-drawings'],
+    ['Eyeball Cards', 'eyeball-cards'],
+    ["See Red Women's Workshop: Feminist Posters 1974-1990", 'see-red-womens-workshop'],
+    ['Twenty Thousand Leagues Under The Sea', 'twenty-thousand-leagues-under-the-sea'],
+    ['Heart of Darkness', 'heart-of-darkness'],
+    ['The Overcoat', 'the-overcoat'],
+    ['The Nose', 'the-nose'],
+    ['The Art of Smallfilms', 'the-art-of-smallfilms'],
+    ['Some Canterbury Tales', 'some-canterbury-tales'],
+    ['The Graphic World Of Paul Peter Piech', 'the-graphic-world-of-paul-peter-piech'],
+    ['Pirate Nightmare Vice Explosion', 'pirate-nightmare-vice-explosion'],
+    ['Madame Bovary', 'madame-bovary'],
+    ['Prison Landscapes', 'prison-landscapes'],
+    ['Disturbances', 'disturbances-critical-art-ensemble'],
+    ['The Prisoner of Zenda', 'the-prisoner-of-zenda'],
+    ["Beauty is in the Street, A Visual Record of the May '68 Paris Uprising", 'beauty-is-in-the-street'],
+    ['Vanity Fair', 'vanity-fair'],
+    ['Free Speech Zone', 'free-speech-zone-michael-patterson-carver'],
+    ['Show And Tell: A Chronicle Of Group Material', 'show-and-tell-a-chronicle-of-group-material'],
+    ['A Stick of Green Candy', 'a-stick-of-green-candy'],
+    ['Nau Sea Sea Sick', 'nau-sea-sea-sick'],
+    ['The Jet Age Compendium: Paolozzi at Ambit', 'the-jet-age-compendium-paolozzi-at-ambit'],
+    ['Dracula', 'dracula'],
+    ['Blumfeld, an Elderly Bachelor', 'blumfeld-an-elderly-bachelor'],
+    ['The Picture of Dorian Gray', 'the-picture-of-dorian-gray'],
+    ['About The Relative Size Of Things In The Universe', 'about-the-relative-size-of-things-in-the-universe'],
+    ['How to Ride the Bus', 'how-to-ride-the-bus'],
+    ['Come Alive! The Spirited Art Of Sister Corita', 'come-alive-the-spirited-art-of-sister-corita'],
+    ['Brian Wilson: An Art Book', 'brian-wilson'],
+    ['An Architecture of Play', 'an-architecture-of-play']
+  ];
+  Object.assign(BOOKS[1], {
+    title: '포코너북스', author: 'Four Corners Books', publisher: 'London', year: '2003–',
+    shots: FCB.map(([caption, slug]) => ({ ratio: 4 / 5, caption, href: `https://www.fourcornersbooks.co.uk/books/${slug}/` })),
+  });
 
   const list = document.getElementById('list');
   const detail = document.getElementById('detail');
@@ -117,7 +172,13 @@
     detail.innerHTML = `
       <h1>${esc(b.title)}</h1>
       <p class="meta">${esc(b.author)} · ${esc(b.publisher)} · ${b.year} — ${esc(b.date)}에 같이 봄</p>
-      <div class="shots">${b.shots.map((r, k) => `<div class="shot" style="aspect-ratio:${r}">${k + 1} / ${b.shots.length}</div>`).join('')}</div>
+      <div class="shots">${b.shots.map((sh, k) => {
+        const { ratio, caption, href } = typeof sh === 'number' ? { ratio: sh } : sh;
+        const label = caption ? esc(caption) : `${k + 1} / ${b.shots.length}`;
+        return href
+          ? `<a class="shot" href="${esc(href)}" target="_blank" rel="noopener" style="aspect-ratio:${ratio}">${label}</a>`
+          : `<div class="shot" style="aspect-ratio:${ratio}">${label}</div>`;
+      }).join('')}</div>
       <div class="desc">${b.desc.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
       <section class="comments">
         <h2>댓글 ${b.comments.length}</h2>
